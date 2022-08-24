@@ -3,13 +3,24 @@ package com.feedthecraft;
 import javafx.scene.control.ListView;
 
 public class InstanceList {
-    private ListView<MinecraftInstance> listView;
+    private static ListView<MinecraftInstance> listView;
+    private static InstanceList single_instance = null;
 
-    InstanceList(){
+    private InstanceList(){
         listView = new ListView<MinecraftInstance>();
     }
 
-    public ListView<MinecraftInstance> getInstanceList() {
+    public static ListView<MinecraftInstance> getInstanceList() {
         return listView;
+    }
+    public static void addInstance(MinecraftInstance instance){
+        listView.getItems().add(instance);
+    }
+    public static InstanceList getInstance()
+    {
+        if (single_instance == null)
+            single_instance = new InstanceList();
+
+        return single_instance;
     }
 }
